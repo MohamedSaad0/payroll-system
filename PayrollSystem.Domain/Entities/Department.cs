@@ -22,7 +22,7 @@ namespace PayrollSystem.Domain.Entities
             Update(name, incentivePercentage);
         }
 
-        private void Update(string name, decimal incentivePercentage)
+        public void Update(string name, decimal incentivePercentage)
         {
             if (string.IsNullOrWhiteSpace(name))
             {

@@ -13,7 +13,7 @@ namespace PayrollSystem.Domain.Entities
         public decimal Percentage { get; private set; }
         public bool IsIncentive { get; private set; }
 
-        public AbsencePolicy()
+        private AbsencePolicy()
         {
             
         }

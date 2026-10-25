@@ -7,11 +7,11 @@ namespace PayrollSystem.Domain.Entities
     public class Employee
     {
         public int Id { get; private set; }
-        public string Name { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         public DateTime DateOfBirth { get; private set; }
         public string Address { get; private set; } = string.Empty;
         public string PhoneNumber { get; private set; } = string.Empty;
-        public string Email { get; private set; }
+        public string Email { get; private set; } = string.Empty;
         public DateTime HireDate { get; private set; }
         public int JobGradeId { get; private set; }
         public JobGrade JobGrade { get; private set; } = null!;

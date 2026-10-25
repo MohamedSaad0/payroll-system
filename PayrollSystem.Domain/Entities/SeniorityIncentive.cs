@@ -21,7 +21,7 @@ namespace PayrollSystem.Domain.Entities
             
         }
 
-        private void Update(int minYears, decimal incentivePercentage)
+        public void Update(int minYears, decimal incentivePercentage)
         {
             if (minYears > 0)
             {
