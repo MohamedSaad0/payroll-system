@@ -10,7 +10,7 @@ namespace PayrollSystem.Domain.Entities
         public int MinYears { get; private set; }
         public decimal IncentivePercentage { get; private set; }
 
-        public SeniorityIncentive()
+        private SeniorityIncentive()
         {
             
         }

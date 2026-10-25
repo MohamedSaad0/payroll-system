@@ -10,7 +10,9 @@ namespace PayrollSystem.Domain.Entities
         public string Name { get; private set; } = string.Empty;
         public decimal IncentivePercentage { get; private set; }
 
-        public Department()
+        public ICollection<Employee> Employees { get; private set; } = [];
+
+        private Department()
         {
             
         }

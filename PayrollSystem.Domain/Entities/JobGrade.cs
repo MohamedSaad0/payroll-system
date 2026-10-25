@@ -9,6 +9,7 @@ namespace PayrollSystem.Domain.Entities
         public int Id { get; private set; }
         public string Name { get; private set; } = string.Empty;
         public decimal BaseSalary { get; private set; }
+        public ICollection<Employee> Employees { get; private set; } = [];
 
         private JobGrade() { }
 
