@@ -1,0 +1,85 @@
+﻿@using PayrollSystem.Application.DTOs.Employees
+@model EmployeeFormDto
+
+@{
+    ViewData["Title"] = "إضافة موظف";
+}
+
+<div class="card shadow-sm mx-auto" style="max-width: 800px;">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">إضافة موظف جديد</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" method="post" asp-antiforgery="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Name" class="form-label fw-bold"></label>
+                    <input asp-for="Name" class="form-control" placeholder="الاسم الرباعي" />
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label fw-bold"></label>
+                    <input asp-for="Email" type="email" class="form-control" dir="ltr" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="PhoneNumber" class="form-label fw-bold"></label>
+                    <input asp-for="PhoneNumber" class="form-control" dir="ltr" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="DateOfBirth" class="form-label fw-bold"></label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label fw-bold"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger small"></span>
+            </div>
+
+            <hr class="my-4" />
+            <h5 class="text-secondary mb-3">البيانات الوظيفية</h5>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <label asp-for="HireDate" class="form-label fw-bold"></label>
+                    <input asp-for="HireDate" type="date" class="form-control" />
+                    <span asp-validation-for="HireDate" class="text-danger small"></span>
+                </div>
+                
+                <!-- 🎯 The Dropdowns utilizing ViewBag -->
+                <div class="col-md-4">
+                    <label asp-for="DepartmentId" class="form-label fw-bold"></label>
+                    <select asp-for="DepartmentId" class="form-select" asp-items="ViewBag.Departments">
+                        <option value="">-- اختر القسم --</option>
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger small"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="JobGradeId" class="form-label fw-bold"></label>
+                    <select asp-for="JobGradeId" class="form-select" asp-items="ViewBag.JobGrades">
+                        <option value="">-- اختر الدرجة --</option>
+                    </select>
+                    <span asp-validation-for="JobGradeId" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success px-4">حفظ الموظف</button>
+                <a asp-action="Index" class="btn btn-secondary">إلغاء والعودة</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

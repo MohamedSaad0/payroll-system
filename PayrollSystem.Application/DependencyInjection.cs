@@ -13,6 +13,7 @@ namespace PayrollSystem.Application
         {
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IJobGradeService, JobGradeService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             return services;
         }

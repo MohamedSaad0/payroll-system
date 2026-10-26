@@ -9,7 +9,6 @@ namespace PayrollSystem.Application.Interfaces.Services
     {
         Task<IReadOnlyList<DepartmentDto>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<DepartmentFormDto?> GetForEditAsync(int id, CancellationToken cancellationToken = default);
-
         Task<(bool IsSuccess, string ErrorMessage)> CreateAsync(DepartmentFormDto dto, CancellationToken cancellationToken = default);
         Task<(bool IsSuccess, string ErrorMessage)> UpdateAsync(DepartmentFormDto dto, CancellationToken cancellationToken = default);
         Task<(bool IsSuccess, string ErrorMessage)> DeleteAsync(int id, CancellationToken cancellationToken = default);

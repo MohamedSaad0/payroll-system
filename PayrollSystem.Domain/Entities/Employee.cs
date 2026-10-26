@@ -34,10 +34,10 @@ namespace PayrollSystem.Domain.Entities
             int jobGradeId,
             int departmentId)
         {
-            update(name, dateOfBirth, address, phoneNumber, email, hireDate, jobGradeId, departmentId);
+            Update(name, dateOfBirth, address, phoneNumber, email, hireDate, jobGradeId, departmentId);
         }
 
-        private void update(string name, DateTime dateOfBirth, string address, string phoneNumber, string email, DateTime hireDate, int jobGradeId, int departmentId)
+        public void Update(string name, DateTime dateOfBirth, string address, string phoneNumber, string email, DateTime hireDate, int jobGradeId, int departmentId)
         {
             if(string.IsNullOrWhiteSpace(name))
             {
