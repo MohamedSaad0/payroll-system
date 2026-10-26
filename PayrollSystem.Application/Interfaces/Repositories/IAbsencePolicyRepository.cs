@@ -5,9 +5,10 @@ using System.Text;
 
 namespace PayrollSystem.Application.Interfaces.Repositories
 {
-    public interface IAbsencePolicy
+    public interface IAbsencePolicyRepository
     {
         Task<IReadOnlyList<AbsencePolicy>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<AbsencePolicy?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+        Task UpdateAsync(AbsencePolicy absencePolicy, CancellationToken cancellationToken = default);
     }
 }

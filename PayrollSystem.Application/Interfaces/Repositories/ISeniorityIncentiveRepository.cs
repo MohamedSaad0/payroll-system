@@ -5,10 +5,10 @@ using System.Text;
 
 namespace PayrollSystem.Application.Interfaces.Repositories
 {
-    public interface ISeniorityIncentive
+    public interface ISeniorityIncentiveRepository
     {
         Task<IReadOnlyList<SeniorityIncentive>> GetAllAsync(CancellationToken cancellationToken = default);
-        Task<SeniorityIncentive?> FindByIdAsync(int id, CancellationToken cancellationToken = default);
+        Task<SeniorityIncentive?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
         Task<bool> ExistsByMinYearsAsync(int minYear, int? excludeId = null, CancellationToken cancellationToken = default);
 
         Task AddAsync(SeniorityIncentive seniorityIncentive, CancellationToken cancellationToken = default);

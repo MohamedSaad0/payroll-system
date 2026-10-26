@@ -18,7 +18,7 @@ namespace PayrollSystem.Infrastructure.Data
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<EmployeeAbsence> EmployeeAbsences => Set<EmployeeAbsence>();
         public DbSet<SeniorityIncentive> SeniorityIncentives => Set<SeniorityIncentive>();
-        public DbSet<AbsencePolicy> AbsencePolicys => Set<AbsencePolicy>();
+        public DbSet<AbsencePolicy> AbsencePolicies => Set<AbsencePolicy>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
