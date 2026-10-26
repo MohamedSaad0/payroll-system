@@ -17,7 +17,7 @@ namespace PayrollSystem.Domain.Entities
             
         }
 
-        public Department(int id, string name, decimal incentivePercentage = 0)
+        public Department(string name, decimal incentivePercentage = 0)
         {
             Update(name, incentivePercentage);
         }

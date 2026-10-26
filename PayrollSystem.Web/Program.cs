@@ -1,3 +1,4 @@
+using PayrollSystem.Application;
 using PayrollSystem.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using PayrollSystem.Infrastructure.Data;
@@ -10,6 +11,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PayrollDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 
 var app = builder.Build();
