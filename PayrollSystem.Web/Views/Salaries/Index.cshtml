@@ -1,0 +1,38 @@
+﻿@using PayrollSystem.Application.DTOs.JobGrades
+@model IEnumerable<JobGradeDto>
+
+@{
+    ViewData["Title"] = "إدارة المرتبات";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="fa-solid fa-money-bill-wave"></i> إدارة المرتبات (حسب الدرجة الوظيفية)</h2>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-hover table-bordered mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>الدرجة الوظيفية</th>
+                    <th>المرتب الأساسي (جنيه)</th>
+                    <th style="width: 150px;">الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var grade in Model)
+                {
+                    <tr>
+                        <td class="align-middle fw-bold text-primary">@grade.Name</td>
+                        <td class="align-middle">@grade.BaseSalary.ToString("N2")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@grade.Id" class="btn btn-sm btn-outline-secondary w-100">
+                                <i class="fa-solid fa-pen-to-square"></i> تعديل المرتب
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

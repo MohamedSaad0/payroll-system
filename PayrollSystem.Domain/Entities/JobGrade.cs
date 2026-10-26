@@ -15,10 +15,10 @@ namespace PayrollSystem.Domain.Entities
 
         public JobGrade(string name, decimal baseSalary)
         {
-            update(name, baseSalary);
+            Update(name, baseSalary);
         }
 
-        public void update(string name, decimal baseSalary)
+        public void Update(string name, decimal baseSalary)
         {
             if (string.IsNullOrWhiteSpace(name))
             {

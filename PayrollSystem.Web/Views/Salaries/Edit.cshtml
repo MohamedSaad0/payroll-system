@@ -1,0 +1,42 @@
+﻿@using PayrollSystem.Application.DTOs.JobGrades
+@model JobGradeFormDto
+
+@{
+    ViewData["Title"] = "تعديل المرتب الأساسي";
+}
+
+<div class="card shadow-sm mx-auto" style="max-width: 600px;">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">تعديل المرتب الأساسي للدرجة</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post" asp-antiforgery="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label class="form-label fw-bold">الدرجة الوظيفية</label>
+                <input type="text" class="form-control bg-light" value="@Model.Name" disabled />
+                <div class="form-text">لا يمكن تعديل المسمى الوظيفي، فقط تعديل المرتب الأساسي.</div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="BaseSalary" class="form-label fw-bold"></label>
+                <div class="input-group">
+                    <input asp-for="BaseSalary" type="number" step="100" class="form-control" />
+                    <span class="input-group-text">جنيه مصري</span>
+                </div>
+                <span asp-validation-for="BaseSalary" class="text-danger small"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success px-4">حفظ التعديلات</button>
+                <a asp-action="Index" class="btn btn-secondary">إلغاء والعودة</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

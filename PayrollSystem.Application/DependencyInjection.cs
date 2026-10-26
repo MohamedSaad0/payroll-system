@@ -12,6 +12,7 @@ namespace PayrollSystem.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IJobGradeService, JobGradeService>();
 
             return services;
         }
