@@ -1,0 +1,86 @@
+﻿@using PayrollSystem.Application.DTOs.Incentives
+@using PayrollSystem.Application.DTOs.Departments
+@model IEnumerable<SeniorityIncentiveDto>
+
+@{
+    ViewData["Title"] = "إدارة الحوافز";
+    
+    var departments = ViewBag.Departments as IEnumerable<DepartmentDto> ?? new List<DepartmentDto>();
+}
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3><i class="fa-solid fa-building"></i> حوافز الأقسام</h3>
+        </div>
+        <div class="card shadow-sm border-primary">
+            <div class="card-body">
+                <table class="table table-hover mb-0">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>القسم</th>
+                            <th>نسبة الحافز (%)</th>
+                            <th style="width: 100px;">الإجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var dept in departments)
+                        {
+                            <tr>
+                                <td class="align-middle fw-bold">@dept.Name</td>
+                                <td class="align-middle">@dept.IncentivePercentage%</td>
+                                <td>
+                                    <a asp-action="EditDepartmentIncentive" asp-route-id="@dept.Id" class="btn btn-sm btn-outline-primary w-100">
+                                        تعديل
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3><i class="fa-solid fa-medal"></i> حوافز سنوات العمل (الأقدمية)</h3>
+            <a asp-action="CreateSeniorityRule" class="btn btn-success btn-sm">
+                <i class="fa-solid fa-plus"></i> إضافة قاعدة جديدة
+            </a>
+        </div>
+        <div class="card shadow-sm border-success">
+            <div class="card-body">
+                <table class="table table-hover mb-0">
+                    <thead class="table-success">
+                        <tr>
+                            <th>الشرط (أكثر من)</th>
+                            <th>نسبة الحافز (%)</th>
+                            <th style="width: 100px;">الإجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Any())
+                        {
+                            <tr><td colspan="3" class="text-center py-3">لا توجد قواعد مسجلة.</td></tr>
+                        }
+                        else
+                        {
+                            @foreach (var rule in Model)
+                            {
+                                <tr>
+                                    <td class="align-middle fw-bold">@rule.MinYears سنوات</td>
+                                    <td class="align-middle">@rule.IncentivePercentage%</td>
+                                    <td>
+                                        <a asp-action="EditSeniorityRule" asp-route-id="@rule.Id" class="btn btn-sm btn-outline-success w-100">
+                                            تعديل
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

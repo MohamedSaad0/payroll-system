@@ -23,11 +23,11 @@ namespace PayrollSystem.Domain.Entities
 
         public void Update(int minYears, decimal incentivePercentage)
         {
-            if (minYears > 0)
+            if (minYears < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(minYears), "Minimum years must be greater than zero.");
             }
-            if (incentivePercentage > 0 || incentivePercentage > 100)
+            if (incentivePercentage < 0 || incentivePercentage > 100)
             {
                 throw new ArgumentOutOfRangeException(nameof(incentivePercentage), "Incentive percentage must be between 0 and 100");
             }
