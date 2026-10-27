@@ -88,7 +88,8 @@ namespace PayrollSystem.Web.Controllers
 
             if (!isSuccess)
             {
-                return BadRequest(errorMessage);
+                TempData["ErrorMessage"] = errorMessage;
+                return RedirectToAction(nameof(Index));
             }
 
             return RedirectToAction(nameof(Index));

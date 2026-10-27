@@ -45,5 +45,10 @@ namespace PayrollSystem.Infrastructure.Repositories
             _context.EmployeeAbsences.Update(absence);
             await _context.SaveChangesAsync(cancellationToken);
         }
+        public async Task RemoveAsync(EmployeeAbsence absence, CancellationToken cancellationToken = default)
+        {
+            _context.EmployeeAbsences.Remove(absence);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

@@ -126,6 +126,20 @@ namespace PayrollSystem.Infrastructure.Migrations
                         .HasDatabaseName("IX_Departments_Name");
 
                     b.ToTable("Departments", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IncentivePercentage = 15.00m,
+                            Name = "تكنولوجيا المعلومات (IT)"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IncentivePercentage = 10.00m,
+                            Name = "الموارد البشرية (HR)"
+                        });
                 });
 
             modelBuilder.Entity("PayrollSystem.Domain.Entities.Employee", b =>
@@ -181,6 +195,44 @@ namespace PayrollSystem.Infrastructure.Migrations
                         .HasDatabaseName("IX_Employees_Name");
 
                     b.ToTable("Employees", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "الإسكندرية، مصر",
+                            DateOfBirth = new DateTime(1990, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = 1,
+                            Email = "ahmed@company.com",
+                            HireDate = new DateTime(2015, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JobGradeId = 1,
+                            Name = "أحمد محمود كمال",
+                            PhoneNumber = "01012345678"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "القاهرة، مصر",
+                            DateOfBirth = new DateTime(1995, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = 2,
+                            Email = "sara@company.com",
+                            HireDate = new DateTime(2019, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JobGradeId = 2,
+                            Name = "سارة طارق سعيد",
+                            PhoneNumber = "01198765432"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "الجيزة، مصر",
+                            DateOfBirth = new DateTime(1998, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = 1,
+                            Email = "karim@company.com",
+                            HireDate = new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JobGradeId = 3,
+                            Name = "كريم مصطفى فهمي",
+                            PhoneNumber = "01234567890"
+                        });
                 });
 
             modelBuilder.Entity("PayrollSystem.Domain.Entities.EmployeeAbsence", b =>
@@ -213,6 +265,32 @@ namespace PayrollSystem.Infrastructure.Migrations
                         .HasDatabaseName("IX_EmployeeAbsences_EmployeeId_Year_Month");
 
                     b.ToTable("EmployeeAbsences", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AbsenceDaysCount = 0,
+                            EmployeeId = 1,
+                            Month = 10,
+                            Year = 2026
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AbsenceDaysCount = 2,
+                            EmployeeId = 2,
+                            Month = 10,
+                            Year = 2026
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AbsenceDaysCount = 7,
+                            EmployeeId = 3,
+                            Month = 10,
+                            Year = 2026
+                        });
                 });
 
             modelBuilder.Entity("PayrollSystem.Domain.Entities.JobGrade", b =>

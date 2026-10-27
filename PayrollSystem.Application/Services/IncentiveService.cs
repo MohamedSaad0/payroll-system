@@ -11,10 +11,12 @@ namespace PayrollSystem.Application.Services
     public class IncentiveService : IIncentiveService
     {
         private readonly ISeniorityIncentiveRepository _seniorityRepository;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public IncentiveService(ISeniorityIncentiveRepository seniorityRepository)
+        public IncentiveService(ISeniorityIncentiveRepository seniorityRepository, IDepartmentRepository departmentRepository)
         {
             _seniorityRepository = seniorityRepository;
+            _departmentRepository = departmentRepository;
         }
 
         public async Task<IReadOnlyList<SeniorityIncentiveDto>> GetAllSeniorityRulesAsync(CancellationToken cancellationToken = default)
@@ -72,6 +74,18 @@ namespace PayrollSystem.Application.Services
             rule.Update(dto.MinYears, dto.IncentivePercentage);
 
             await _seniorityRepository.UpdateAsync(rule, cancellationToken);
+            return (true, string.Empty);
+        }
+        public async Task<(bool IsSuccess, string ErrorMessage)> UpdateDepartmentIncentiveAsync(int id, decimal percentage, CancellationToken cancellationToken = default)
+        {
+            var department = await _departmentRepository.GetByIdAsync(id, cancellationToken);
+            if (department == null)
+            {
+                return (false, "القسم غير موجود.");
+            }
+            department.UpdateIncentive(percentage);
+
+            await _departmentRepository.UpdateAsync(department, cancellationToken);
             return (true, string.Empty);
         }
     }

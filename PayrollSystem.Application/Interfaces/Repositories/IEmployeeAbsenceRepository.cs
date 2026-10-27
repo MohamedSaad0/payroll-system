@@ -13,6 +13,7 @@ namespace PayrollSystem.Application.Interfaces.Repositories
 
         Task AddAsync(EmployeeAbsence employee, CancellationToken cancellationToken = default);
         Task UpdateAsync(EmployeeAbsence employee, CancellationToken cancellationToken = default);
+        Task RemoveAsync(EmployeeAbsence absence, CancellationToken cancellationToken = default);
     }
 
 }

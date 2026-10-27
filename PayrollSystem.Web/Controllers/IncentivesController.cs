@@ -56,7 +56,7 @@ namespace PayrollSystem.Web.Controllers
                 return View(dto);
             }
 
-            var (isSuccess, errorMessage) = await _departmentService.UpdateAsync(dto, cancellationToken);
+            var (isSuccess, errorMessage) = await _incentiveService.UpdateDepartmentIncentiveAsync(dto.Id, dto.IncentivePercentage, cancellationToken);
 
             if (!isSuccess)
             {

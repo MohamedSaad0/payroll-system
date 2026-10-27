@@ -11,10 +11,12 @@ namespace PayrollSystem.Application.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeAbsenceRepository _absenceRepository;
 
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, IEmployeeAbsenceRepository absenceRepository)
         {
             _employeeRepository = employeeRepository;
+            _absenceRepository = absenceRepository;
         }
 
         public async Task<IReadOnlyList<EmployeeDto>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -93,10 +95,19 @@ namespace PayrollSystem.Application.Services
 
         public async Task<(bool IsSuccess, string ErrorMessage)> DeleteAsync(int id, CancellationToken cancellationToken = default)
         {
-            var employee = await _employeeRepository.GetByIdAsync(id, cancellationToken);
+            var employee = await _employeeRepository.GetByIdWithDetailsAsync(id, cancellationToken);
             if (employee == null)
             {
                 return (false, "الموظف غير موجود.");
+            }
+
+            if (employee.Absences != null && employee.Absences.Any())
+            {
+                foreach (var absence in employee.Absences.ToList())
+                {
+
+                    await _absenceRepository.RemoveAsync(absence, cancellationToken);
+                }
             }
 
             await _employeeRepository.RemoveAsync(employee, cancellationToken);
