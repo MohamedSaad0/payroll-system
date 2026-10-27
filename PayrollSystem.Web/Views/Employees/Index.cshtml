@@ -20,6 +20,7 @@
                     <th>الاسم</th>
                     <th>القسم</th>
                     <th>الدرجة الوظيفية</th>
+                    <th>تاريخ الميلاد</th>
                     <th>تاريخ التعيين</th>
                     <th style="width: 150px;">الإجراءات</th>
                 </tr>
@@ -39,15 +40,16 @@
                             <td class="align-middle fw-bold">@emp.Name</td>
                             <td class="align-middle">@emp.DepartmentName</td>
                             <td class="align-middle">@emp.JobGradeName</td>
+                            <td class="align-middle">@emp.DateOfBirth.ToString("yyyy-MM-dd")</td>
                             <td class="align-middle">@emp.HireDate.ToString("yyyy-MM-dd")</td>
-                            <td>
-                                <div class="btn-group">
+                            <td class="text-center align-middle">
+                                <div class="d-flex justify-content-center gap-2">
                                     <a asp-action="Edit" asp-route-id="@emp.Id" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa-solid fa-pen-to-square"></i> تعديل
+                                        <i class="fa-solid fa-pen-to-square ms-1"></i> تعديل
                                     </a>
-                                    <form asp-action="Delete" asp-route-id="@emp.Id" method="post" class="d-inline" asp-antiforgery="true" onsubmit="return confirm('هل أنت متأكد من حذف هذا الموظف؟');">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                            <i class="fa-solid fa-trash"></i> حذف
+                                    <form asp-action="Delete" asp-route-id="@emp.Id" method="post" class="m-0" onsubmit="return confirm('هل أنت متأكد من حذف هذا الموظف؟');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fa-solid fa-trash ms-1"></i> حذف
                                         </button>
                                     </form>
                                 </div>

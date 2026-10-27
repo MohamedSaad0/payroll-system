@@ -1,0 +1,50 @@
+﻿@using PayrollSystem.Application.DTOs.Reports
+@model IEnumerable<PayrollReportDto>
+
+@{
+    ViewData["Title"] = "تقرير الحوافز والخصومات";
+}
+
+<h2 class="mb-4"><i class="fa-solid fa-file-invoice-dollar"></i> لوحة التقارير الشاملة</h2>
+
+<partial name="_ReportTabsPartial" />
+
+<div class="card shadow-sm border-success">
+    <div class="card-header bg-success text-white">
+        <h5 class="mb-0">تفصيل الحوافز والخصومات - شهر @ViewBag.SelectedMonth لسنة @ViewBag.SelectedYear</h5>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover table-bordered mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>اسم الموظف</th>
+                    <th>حافز القسم</th>
+                    <th>حافز الأقدمية</th>
+                    <th>حافز الانتظام</th>
+                    <th class="text-success">إجمالي الحوافز</th>
+                    <th class="text-danger">خصم الغياب</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="6" class="text-center py-4">لا توجد بيانات لهذا الشهر.</td></tr>
+                }
+                else
+                {
+                    @foreach (var rep in Model)
+                    {
+                        <tr>
+                            <td class="align-middle fw-bold">@rep.EmployeeName</td>
+                            <td class="align-middle">@rep.DepartmentIncentiveAmount.ToString("N2")</td>
+                            <td class="align-middle">@rep.SeniorityIncentiveAmount.ToString("N2")</td>
+                            <td class="align-middle">@rep.AttendanceIncentiveAmount.ToString("N2")</td>
+                            <td class="align-middle text-success fw-bold">@rep.TotalIncentives.ToString("N2")</td>
+                            <td class="align-middle text-danger fw-bold">@rep.AbsenceDeductionAmount.ToString("N2")</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

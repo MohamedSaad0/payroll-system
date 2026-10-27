@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PayrollSystem.Application.DTOs.Employees
 {
-    public class EmployeeFormDto
+    public class EmployeeFormDto : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -47,6 +47,17 @@ namespace PayrollSystem.Application.DTOs.Employees
         [Required(ErrorMessage = "يجب اختيار القسم.")]
         [Display(Name = "القسم التابع له")]
         public int DepartmentId { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (HireDate < DateOfBirth.AddYears(18))
+            {
+                yield return new ValidationResult(
+                    "يجب أن يكون عمر الموظف 18 عاماً على الأقل عند تاريخ التعيين.",
+                    new[] { nameof(HireDate) }
+                );
+            }
+        }
     }
 
 }

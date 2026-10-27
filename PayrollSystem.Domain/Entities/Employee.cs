@@ -43,6 +43,10 @@ namespace PayrollSystem.Domain.Entities
             {
                 throw new ArgumentException("Employee name is required.", nameof(name));
             }
+            if (hireDate < dateOfBirth.AddYears(18))
+            {
+                throw new ArgumentException("Employee must be at least 18 years old at the time of hiring.");
+            }
             if (string.IsNullOrWhiteSpace(email))
             {
                 throw new ArgumentException("Email is required.", nameof(email));

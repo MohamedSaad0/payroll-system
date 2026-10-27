@@ -1,0 +1,59 @@
+﻿@using PayrollSystem.Application.DTOs.Reports
+@model IEnumerable<AttendanceReportDto>
+
+@{
+    ViewData["Title"] = "تقرير الحضور والانصراف";
+}
+
+<h2 class="mb-4"><i class="fa-solid fa-file-invoice-dollar"></i> لوحة التقارير الشاملة</h2>
+
+<partial name="_ReportTabsPartial" />
+
+<div class="card shadow-sm border-info">
+    <div class="card-header bg-info text-white">
+        <h5 class="mb-0">تقرير الحضور والانصراف - شهر @ViewBag.SelectedMonth لسنة @ViewBag.SelectedYear</h5>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover table-bordered mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>اسم الموظف</th>
+                    <th>القسم</th>
+                    <th>أيام الغياب المسجلة</th>
+                    <th>ملاحظات النظام</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="4" class="text-center py-4">لا توجد سجلات غياب مسجلة لهذا الشهر.</td></tr>
+                }
+                else
+                {
+                    @foreach (var rep in Model)
+                    {
+                        <tr>
+                            <td class="align-middle fw-bold">@rep.EmployeeName</td>
+                            <td class="align-middle">@rep.DepartmentName</td>
+                            <td class="align-middle text-danger fw-bold">@rep.AbsenceDaysCount يوم</td>
+                            <td class="align-middle">
+                                @if (rep.AbsenceDaysCount <= 1)
+                                {
+                                    <span class="badge bg-success">مستحق حافز حضور</span>
+                                }
+                                else if (rep.AbsenceDaysCount == 2)
+                                {
+                                    <span class="badge bg-secondary">لا حافز ولا خصم</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">مستحق خصم غياب</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

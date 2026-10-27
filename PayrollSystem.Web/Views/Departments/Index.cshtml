@@ -36,18 +36,19 @@
                         <tr>
                             <td class="align-middle">@dept.Name</td>
                             <td class="align-middle">@dept.IncentivePercentage%</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a asp-action="Edit" asp-route-id="@dept.Id" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa-solid fa-pen-to-square"></i> تعديل
-                                    </a>
-                                    <form asp-action="Delete" asp-route-id="@dept.Id" method="post" class="d-inline" asp-antiforgery="true" onsubmit="return confirm('هل أنت متأكد من حذف هذا القسم؟');">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                            <i class="fa-solid fa-trash"></i> حذف
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
+                            <td class="text-center align-middle">
+    <div class="d-flex justify-content-center gap-2">
+        <a asp-action="Edit" asp-route-id="@dept.Id" class="btn btn-sm btn-outline-secondary">
+            <i class="fa-solid fa-pen-to-square ms-1"></i> تعديل
+        </a>
+        
+        <form asp-action="Delete" asp-route-id="@dept.Id" method="post" class="m-0" asp-antiforgery="true" onsubmit="return confirm('هل أنت متأكد من حذف هذا القسم؟');">
+            <button type="submit" class="btn btn-sm btn-outline-danger">
+                <i class="fa-solid fa-trash ms-1"></i> حذف
+            </button>
+        </form>
+    </div>
+</td>
                         </tr>
                     }
                 }

@@ -1,0 +1,61 @@
+﻿@{
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var year = ViewBag.SelectedYear;
+    var month = ViewBag.SelectedMonth;
+}
+
+<ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link @(currentAction == "Index" ? "active fw-bold" : "")" 
+           asp-action="Index" asp-route-year="@year" asp-route-month="@month">تقرير المرتبات الصافية</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(currentAction == "Incentives" ? "active fw-bold" : "")" 
+           asp-action="Incentives" asp-route-year="@year" asp-route-month="@month">تقرير الحوافز والخصومات</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(currentAction == "Attendance" ? "active fw-bold" : "")" 
+           asp-action="Attendance" asp-route-year="@year" asp-route-month="@month">تقرير غياب الموظفين</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(currentAction == "Employees" ? "active fw-bold" : "")" 
+           asp-action="Employees">بيانات العاملين</a>
+    </li>
+</ul>
+
+@if (currentAction != "Employees")
+{
+    <div class="card shadow-sm mb-4 bg-light border-0">
+        <div class="card-body py-3">
+            <form method="get" class="row gx-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label fw-bold">السنة:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="number" name="year" class="form-control" value="@year" style="width: 100px;" />
+                </div>
+                <div class="col-auto">
+                    <label class="col-form-label fw-bold">الشهر:</label>
+                </div>
+                <div class="col-auto">
+                    <select name="month" class="form-select" style="width: 120px;">
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            if (month == i)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">تحديث التقرير</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}

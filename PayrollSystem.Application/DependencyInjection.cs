@@ -16,6 +16,7 @@ namespace PayrollSystem.Application
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IIncentiveService, IncentiveService>();
             services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IReportService, ReportService>();
 
             return services;
         }

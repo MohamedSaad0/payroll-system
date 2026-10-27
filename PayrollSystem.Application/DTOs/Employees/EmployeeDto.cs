@@ -11,6 +11,7 @@ namespace PayrollSystem.Application.DTOs.Employees
         public string Email { get; init; } = string.Empty;
         public string PhoneNumber { get; init; } = string.Empty;
         public DateTime HireDate { get; init; }
+        public DateTime DateOfBirth { get; init; }
         public string DepartmentName { get; init; } = string.Empty;
         public string JobGradeName { get; init; } = string.Empty;
 

@@ -28,6 +28,7 @@ namespace PayrollSystem.Application.Services
                 Email = e.Email,
                 PhoneNumber = e.PhoneNumber,
                 HireDate = e.HireDate,
+                DateOfBirth = e.DateOfBirth,
                 DepartmentName = e.Department.Name,
                 JobGradeName = e.JobGrade.Name
             }).ToList();
