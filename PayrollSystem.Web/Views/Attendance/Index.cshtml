@@ -1,0 +1,127 @@
+﻿@using PayrollSystem.Application.DTOs.Attendance
+@model IEnumerable<EmployeeAbsenceDto>
+
+@{
+    ViewData["Title"] = "الحضور والانصراف";
+    var policies = ViewBag.Policies as IEnumerable<AbsencePolicyDto> ?? new List<AbsencePolicyDto>();
+}
+
+<div class="card shadow-sm border-primary mb-5">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fa-solid fa-scale-balanced"></i> قواعد الغياب والحضور</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>الحالة (عدد أيام الغياب)</th>
+                    <th>النوع</th>
+                    <th>النسبة (%)</th>
+                    <th style="width: 100px;">الإجراء</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var policy in policies)
+                {
+                    <tr>
+                        <td class="align-middle fw-bold">@policy.Bracket</td>
+                        <td class="align-middle">
+                            @if (policy.IsIncentive)
+                            {
+                                <span class="badge bg-success">حافز حضور</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">خصم غياب</span>
+                            }
+                        </td>
+                        <td class="align-middle">@policy.Percentage%</td>
+                        <td>
+                            <a asp-action="EditPolicy" asp-route-id="@policy.Id" class="btn btn-sm btn-outline-primary w-100">
+                                تعديل النسبة
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3><i class="fa-solid fa-calendar-days"></i> سجلات الغياب الشهرية</h3>
+    <a asp-action="RecordAbsence" class="btn btn-danger">
+        <i class="fa-solid fa-plus"></i> تسجيل غياب جديد
+    </a>
+</div>
+
+<div class="card shadow-sm mb-4 bg-light">
+    <div class="card-body py-3">
+        <form asp-action="Index" method="get" class="row gx-3 align-items-center">
+            <div class="col-auto">
+                <label class="col-form-label fw-bold">السنة:</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" name="year" class="form-control" value="@ViewBag.SelectedYear" style="width: 100px;" />
+            </div>
+            <div class="col-auto">
+                <label class="col-form-label fw-bold">الشهر:</label>
+            </div>
+            <div class="col-auto">
+                <select name="month" class="form-select" style="width: 120px;">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        if (ViewBag.SelectedMonth == i)
+                        {
+                            <option value="@i" selected>@i</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-secondary">عرض السجلات</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm border-danger">
+    <div class="card-body">
+        <table class="table table-hover mb-0">
+            <thead class="table-danger">
+                <tr>
+                    <th>اسم الموظف</th>
+                    <th>القسم</th>
+                    <th>أيام الغياب</th>
+                    <th style="width: 100px;">الإجراء</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="4" class="text-center py-4">لا توجد سجلات غياب لهذا الشهر.</td></tr>
+                }
+                else
+                {
+                    @foreach (var record in Model)
+                    {
+                        <tr>
+                            <td class="align-middle fw-bold">@record.EmployeeName</td>
+                            <td class="align-middle">@record.DepartmentName</td>
+                            <td class="align-middle text-danger fw-bold">@record.AbsenceDaysCount يوم</td>
+                            <td>
+                                <a asp-action="EditAbsence" asp-route-id="@record.Id" class="btn btn-sm btn-outline-danger w-100">
+                                    تعديل
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

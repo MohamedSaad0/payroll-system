@@ -34,7 +34,7 @@
 
         public void UpdateAbsenceDays(int absenceDaysCount)
         {
-            if(absenceDaysCount <= 0 || absenceDaysCount > 31)
+            if(absenceDaysCount < 0 || absenceDaysCount > 31)
             {
                 throw new ArgumentOutOfRangeException(nameof(absenceDaysCount), "Absence days must be between 0 and 31.");
             }

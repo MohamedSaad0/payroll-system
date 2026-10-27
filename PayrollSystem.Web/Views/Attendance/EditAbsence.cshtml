@@ -1,0 +1,65 @@
+﻿@using PayrollSystem.Application.DTOs.Attendance
+@model EmployeeAbsenceFormDto
+
+@{
+    ViewData["Title"] = "تعديل سجل غياب";
+}
+
+<div class="card shadow-sm mx-auto border-danger" style="max-width: 600px;">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0"><i class="fa-solid fa-pen-to-square"></i> تعديل سجل أيام الغياب</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="EditAbsence" method="post" asp-antiforgery="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="EmployeeId" />
+            <input type="hidden" asp-for="Year" />
+            <input type="hidden" asp-for="Month" />
+
+            <div class="mb-4">
+                <label class="form-label fw-bold">الموظف</label>
+                <select asp-for="EmployeeId" class="form-select bg-light" asp-items="ViewBag.Employees" disabled>
+                </select>
+                <div class="form-text">لا يمكن تغيير الموظف بعد إنشاء السجل. إذا كان الموظف خاطئ، قم بإنشاء سجل جديد.</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">السنة</label>
+                    <input asp-for="Year" type="number" class="form-control bg-light" disabled />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">الشهر</label>
+                    <select asp-for="Month" class="form-select bg-light" disabled>
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="mb-4">
+                <label asp-for="AbsenceDaysCount" class="form-label fw-bold text-danger">تعديل عدد الأيام:</label>
+                <div class="input-group">
+                    <input asp-for="AbsenceDaysCount" type="number" min="0" max="31" class="form-control border-danger" />
+                    <span class="input-group-text">أيام</span>
+                </div>
+                <span asp-validation-for="AbsenceDaysCount" class="text-danger small"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-danger px-4">حفظ التعديلات</button>
+                <a asp-action="Index" class="btn btn-secondary">إلغاء والعودة</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
